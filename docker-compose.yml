@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  kantechrh-bridge:
+    build: .
+    container_name: kantechrh-bridge
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+    networks:
+      - traefik-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy"
+      - "traefik.http.routers.kantechrh-bridge.rule=Host(`api.kantechrh.com.br`)"
+      - "traefik.http.routers.kantechrh-bridge.entrypoints=websecure"
+      - "traefik.http.routers.kantechrh-bridge.tls=true"
+      - "traefik.http.routers.kantechrh-bridge.tls.certresolver=letsencrypt"
+      - "traefik.http.services.kantechrh-bridge.loadbalancer.server.port=8000"
+
+networks:
+  traefik-proxy:
+    external: true
