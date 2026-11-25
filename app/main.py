@@ -37,7 +37,7 @@ if SUPABASE_URL and SUPABASE_KEY:
 DATA_DIR = Path("/data")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 PROCESSED_FILE = DATA_DIR / "processed_events.json"
-PLANOS_VALIDOS = {"free", "start", "intermediario"}
+PLANOS_VALIDOS = {"free", "start", "intermediario", "business", "pro", "alta_performance"}
 TABELA_PRECOS = {"start": 99.00, "intermediario": 199.00}
 
 class SignupRequestIn(BaseModel):
